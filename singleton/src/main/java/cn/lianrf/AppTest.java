@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
 public class AppTest {
 
     public static void main(String[] args) {
-        test3();
+        test2();
     }
 
     public static void test1() {

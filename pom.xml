@@ -11,6 +11,8 @@
     <modules>
         <module>factory</module>
         <module>singleton</module>
+        <module>mybatis</module>
+        <module>common</module>
     </modules>
 
 
