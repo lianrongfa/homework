@@ -14,21 +14,18 @@ public class SqlSession {
 
     public SqlSession(Configuration configuration) {
         this.configuration = configuration;
-        this.executor = executor;
+        this.executor = configuration.getExecutor();
     }
 
     public <T> T getMapper(Class<T> clazz) {
-
-        configuration.getMapper(clazz,this);
-        T t = (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new MapperProxy(this));
-        return t;
+        return configuration.getMapper(clazz,this);
     }
 
-    public <T> T selectOne(String statement,Object parameter) {
-        return executor.selectOne(statement,parameter);
+    public <T> T selectOne(String sql,Object parameter) {
+        return executor.selectOne(getConnection(),sql,parameter);
     }
 
     public Connection getConnection() {
-        return null;
+        return configuration.getConnection();
     }
 }
