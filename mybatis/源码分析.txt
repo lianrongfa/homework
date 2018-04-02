@@ -25,18 +25,11 @@
 
 3.MyBatis的plugin实现机制
 
+
 4.lazy loading 是怎么做到的？
 代理实现的，可以配置ProxyFactory的值，可选择CGLIB|JAVASSIST，3.3以后默认采用JAVASSIT。
 
 课后作业 20180401
 1. 手写1.0
 2. 2.0版本的基础上，用annotation
-
-
-部分笔记
-为什么javaconfig 比xml用得多了
-
-1. Executor主要的功能是query
-2. query里分解动作
-    -》执行拿到结果  StatementHandler  17-24
-    -》结果映射      ResultSetHandler  25
+地址：https://github.com/lianrongfa/homework/tree/master/mybatis
