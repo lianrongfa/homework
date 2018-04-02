@@ -1,41 +1,32 @@
 1.怎么验证一级缓存的存在？
+非spring在同一session环境中查看打印日志，有一级缓存存在。但是在spring环境中一级缓存无效，因为在spring环境中使用SqlSessionTempalte重新生成了session
 
 2.验证N+1问题
+2018-04-02 14:07:34.280 DEBUG 9848 --- [nio-8080-exec-2] c.l.m.UserMapper.selectByPrimaryKey      : ==>  Preparing: select id, name, age, birthday, student from t_user 
+2018-04-02 14:07:34.680 DEBUG 9848 --- [nio-8080-exec-2] c.l.m.UserMapper.selectByPrimaryKey      : ==> Parameters: 
+2018-04-02 14:07:34.996 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====>  Preparing: select id, t_id, t_name from test2 where t_id = ? 
+2018-04-02 14:07:34.999 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====> Parameters: 1(String)
+2018-04-02 14:07:35.011 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : <====      Total: 2
+2018-04-02 14:07:35.019 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====>  Preparing: select id, t_id, t_name from test2 where t_id = ? 
+2018-04-02 14:07:35.023 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====> Parameters: 10(String)
+2018-04-02 14:07:35.027 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : <====      Total: 0
+2018-04-02 14:07:35.035 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====>  Preparing: select id, t_id, t_name from test2 where t_id = ? 
+2018-04-02 14:07:35.038 DEBUG 9848 --- [nio-8080-exec-2] c.l.mapper.TestMapper.selectTestByTId    : ====> Parameters: 11(String)
 
 3. org.apache.ibatis.binding.MapperProxy#invoke 这个类的53行什么时候执行？
+在jdk1.8中可以存在default修饰的方法，故为执行接口中方法时执行。
 
 源码分析作业 20180331
 1. TestMapper 作者为什么要设计这样的形式来做？
 为什么不是一个class而是一个interface?
+因为程序逻辑为固定的，不需要做其他的处理，故可以设计为接口。
 
 2.org.apache.ibatis.executor.BaseExecutor#queryFromDatabase 322行这行代码的意义
 
 3.MyBatis的plugin实现机制
 
 4.lazy loading 是怎么做到的？
-
-部分笔记
-
-createResultObject
-
-1.族群隔离
-2.分类选择大类处理
-3.日志、共性动作很好的分离
-
-
-同源下的delegate -->装饰器
-
-controller
-service
-    rpc
-    rpc
-    rpc
-
-
-1.0版本
-
-TestMapper --- > TestMapper.xml
-找到SQL
+代理实现的，可以配置ProxyFactory的值，可选择CGLIB|JAVASSIST，3.3以后默认采用JAVASSIT。
 
 课后作业 20180401
 1. 手写1.0
