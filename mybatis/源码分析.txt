@@ -24,7 +24,7 @@
 2.org.apache.ibatis.executor.BaseExecutor#queryFromDatabase 322行这行代码的意义
 
 3.MyBatis的plugin实现机制
-
+通过代理实现拦截器，在拦截器中可以改变Mybatis的默认行为（诸如SQL重写之类的）。
 
 4.lazy loading 是怎么做到的？
 代理实现的，可以配置ProxyFactory的值，可选择CGLIB|JAVASSIST，3.3以后默认采用JAVASSIT。
