@@ -5,4 +5,5 @@ package cn.lianrf.mybatis;
  */
 public interface Interceptor {
     Object interceptor(Invocation invocation);
+    Object plugAll(Object target);
 }

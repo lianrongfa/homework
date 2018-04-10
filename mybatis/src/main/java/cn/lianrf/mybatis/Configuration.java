@@ -39,4 +39,9 @@ public class Configuration {
     public Executor getExecutor() {
         return executor;
     }
+
+    public Executor newExecutor(){
+        Executor executor = new Executor();
+        return (Executor)interceptorChain.pluginAll(executor);
+    }
 }
