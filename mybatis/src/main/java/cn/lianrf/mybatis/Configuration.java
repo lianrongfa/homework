@@ -10,12 +10,7 @@ import java.sql.SQLException;
  */
 public class Configuration {
 
-    private Executor executor;
 	protected final InterceptorChain interceptorChain = new InterceptorChain();
-
-    public Configuration(Executor executor) {
-        this.executor = executor;
-    }
 
     public <T> T getMapper(Class<T> clazz, SqlSession sqlSession) {
         T t = (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new MapperProxy(sqlSession));
@@ -26,7 +21,7 @@ public class Configuration {
         Connection connection=null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/learn", "root", "");
+            connection= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/learn", "root", "root");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -36,12 +31,10 @@ public class Configuration {
         return connection;
     }
 
-    public Executor getExecutor() {
-        return executor;
-    }
 
     public Executor newExecutor(){
-        Executor executor = new Executor();
+        Executor executor = new SimpleExecutor();
+        interceptorChain.addInterceptor(new SelectInterceptor());
         return (Executor)interceptorChain.pluginAll(executor);
     }
 }

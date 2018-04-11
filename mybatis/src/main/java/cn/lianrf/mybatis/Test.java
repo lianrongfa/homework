@@ -30,4 +30,13 @@ public class Test {
     public void settName(String tName) {
         this.tName = tName == null ? null : tName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id='" + id + '\'' +
+                ", tId='" + tId + '\'' +
+                ", tName='" + tName + '\'' +
+                '}';
+    }
 }

@@ -7,7 +7,7 @@ public interface TestMapper {
 
     int insertSelective(Test record);
 
-    @Select("select * from test where id = ?")
+    @Select("select * from test2 where id = ?")
     Test selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(Test record);

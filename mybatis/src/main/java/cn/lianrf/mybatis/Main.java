@@ -5,7 +5,7 @@ package cn.lianrf.mybatis;
  */
 public class Main {
     public static void main(String[] args) {
-        Configuration configuration = new Configuration(new Executor());
+        Configuration configuration = new Configuration();
         SqlSession session = new SqlSession(configuration);
         TestMapper mapper = session.getMapper(TestMapper.class);
         Test test = mapper.selectByPrimaryKey("1");
