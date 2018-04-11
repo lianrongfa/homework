@@ -30,6 +30,5 @@
 代理实现的，可以配置ProxyFactory的值，可选择CGLIB|JAVASSIST，3.3以后默认采用JAVASSIT。
 
 课后作业 20180401
-1. 手写1.0
-2. 2.0版本的基础上，用annotation
+2.0版本的基础上，用annotation和拦截器
 地址：https://github.com/lianrongfa/homework/tree/master/mybatis
